@@ -24,7 +24,7 @@ Open http://127.0.0.1:5173 (or the port Vite prints).
 - **SVG** downloads the last valid diagram with the current theme embedded.
 - **CLEAR** clears the current draft after confirmation.
 
-Every page load starts fresh. Diagram source stays in memory only and is never saved to local storage. Previously stored drafts are removed on load. Theme overrides are not saved. There is no server-side storage, analytics, account, or remote font. Diagram images and links are disabled to avoid diagram-triggered network requests and navigation. This is a Mermaid diagram viewer, not a general Markdown document renderer.
+Every page load starts fresh. Diagram source stays in memory only and is never saved to local storage. Previously stored drafts are removed on load. Theme overrides are not saved. There is no server-side storage, account, or remote font. Diagram images and links are disabled to avoid diagram-triggered network requests and navigation. This is a Mermaid diagram viewer, not a general Markdown document renderer.
 
 ## GitHub Pages
 
