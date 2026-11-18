@@ -1,0 +1,59 @@
+# Mermaid
+
+A minimal Mermaid viewer powered by [Pele](https://pele.run). Monochrome, with device-controlled light and dark themes.
+
+## Run locally
+
+Requires Node.js 20.19+ or 22.12+.
+
+```sh
+npm install
+npm run dev
+```
+
+Open http://127.0.0.1:5173 (or the port Vite prints).
+
+## Use
+
+- Paste Mermaid syntax, including a fenced `mermaid` code block. The first valid diagram automatically opens in the viewer after a short pause.
+- Click **SOURCE** to open the editor alongside the diagram. Changes update live without closing the editor.
+- Click **VIEW**, or press **⌘/Ctrl + Enter**, to toggle the editor.
+- Invalid source shows an error while preserving the last valid diagram.
+- The page follows your device theme and updates when it changes. Use **LIGHT / DARK** in the header for a temporary override; reloading returns to your device setting.
+- Diagrams render inline at their natural size, shrinking to fit narrow pages. Tall diagrams scroll with the page, with no clipped canvas or separate preview window. Use browser zoom to enlarge the page.
+- **SVG** downloads the last valid diagram with the current theme embedded.
+- **CLEAR** clears the current draft after confirmation.
+
+Every page load starts fresh. Diagram source stays in memory only and is never saved to local storage. Previously stored drafts are removed on load. Theme overrides are not saved. There is no server-side storage, analytics, account, or remote font. Diagram images and links are disabled to avoid diagram-triggered network requests and navigation. This is a Mermaid diagram viewer, not a general Markdown document renderer.
+
+## GitHub Pages
+
+Deployed to https://nabn.github.io/mermaid-viewer/ by the root `.github/workflows/pages.yml`.
+The Vite relative asset base (`base: './'`) lets it run from any subpath.
+
+The public site processes diagrams locally in each visitor's browser. Diagram source
+is not persisted or uploaded to GitHub, and every page load starts empty.
+
+## Fonts
+
+Regular and bold WOFF2 files are bundled with the app; no local installation or
+third-party font service is needed. They use the user's tightened Maple Mono Normal
+NF glyphs and spacing, without subsetting. The distributed derivative is named
+**Tight Mono** to respect upstream's Reserved Font Name.
+
+Licenses: `public/fonts/OFL.txt` and `public/fonts/NERD-FONTS-LICENSE.txt`.
+To regenerate from the locally modified TTF files:
+
+```sh
+uv run scripts/build-fonts.py /path/to/MapleTight
+```
+
+## Checks
+
+```sh
+npm run build
+npx playwright install chromium  # first time only
+npm test
+```
+
+The main Pele entry point includes every supported diagram type. Vite may warn about the bundle size; this deliberately trades code splitting for all-types support without runtime fetching.
